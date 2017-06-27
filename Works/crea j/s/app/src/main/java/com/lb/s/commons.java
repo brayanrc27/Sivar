@@ -13,19 +13,10 @@ public class commons {
     private static DateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
     private static DateFormat timeFormat = new SimpleDateFormat("K:mma");
 
-    public String getCurrentTime() {
-        Date today = Calendar.getInstance().getTime();
-        return timeFormat.format(today);
-    }
+    public String getCurrentTime() { return timeFormat.format(Calendar.getInstance().getTime()); }
+    public String getCurrentDate() { return dateFormat.format(Calendar.getInstance().getTime()); }
+    public long getTimeDate(){ return Calendar.getInstance().getTime().getTime(); }
 
-    public String getCurrentDate() {
-        Date today = Calendar.getInstance().getTime();
-        return dateFormat.format(today);
-    }
-    public long getTimeDate(){
-        return Calendar.getInstance().getTime().getTime();
-    }
-    public String getTime(long dt){
-        return dateFormat.format(dt);
-    }
+    public String getTime(long dt){ return timeFormat.format(dt); }
+    public String getDate(long dt){ return dateFormat.format(dt); }
 }

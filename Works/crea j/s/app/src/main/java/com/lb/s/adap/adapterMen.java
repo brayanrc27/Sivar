@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lb.s.R;
@@ -48,19 +49,20 @@ public class adapterMen extends BaseAdapter {
         if (convertView == null)
             vi = inflater.inflate(R.layout.message_design, null);
 
+        commons = new commons();
         TextView msg = vi.findViewById(R.id.message_text);
         TextView dt = vi.findViewById(R.id.message_date);
         msg.setText(message.getMessage());
-        msg.setText(commons.getTime(message.getDate()));
+        dt.setText(commons.getTime(message.getDate()));
         ConstraintLayout layout = vi.findViewById(R.id.bubble_layout);
-        LinearLayout parent_layout =  vi.findViewById(R.id.message_bubble);
+        RelativeLayout parent_layout =  vi.findViewById(R.id.message_bubble);
 
         if (message.getWho()) {
             layout.setBackgroundResource(R.drawable.bubble2);
-            parent_layout.setGravity(Gravity.RIGHT);
-        }else {
+            parent_layout.setGravity(Gravity.END);
+        } else {
             layout.setBackgroundResource(R.drawable.bubble1);
-            parent_layout.setGravity(Gravity.LEFT);
+            parent_layout.setGravity(Gravity.START);
         }
         msg.setTextColor(Color.BLACK);
         return vi;

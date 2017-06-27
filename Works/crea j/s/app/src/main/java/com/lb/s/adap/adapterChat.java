@@ -100,8 +100,8 @@ public class adapterChat extends RecyclerView.Adapter<adapterChat.ViewHolder> {
     }
 
     interface chat {
-        int ID = 1;
-        int CONTACT = 2;
-        int ANONYM = 3;
+        int ID = 0;
+        int CONTACT = 1;
+        int ANONYM = 2;
     }
 }

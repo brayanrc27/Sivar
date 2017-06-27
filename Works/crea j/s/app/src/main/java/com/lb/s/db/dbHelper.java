@@ -83,37 +83,29 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,
                 o.toContentValues());
     }
+
     public Cursor getChat(String id) {
-        return getReadableDatabase()
-                .query(
-                        chat.TABLE_NAME,
-                        null,
-                        chat.ID + "=" + id,
-                        null,
-                        null,
-                        null,
-                        null);
+        String var[] = {id};
+        return getReadableDatabase().query(
+                        chat.TABLE_NAME,null,
+                        chat.ID + "=?",
+                        var,null,null,null);
+    }
+    public Cursor getChat_C(String id) {
+        return getReadableDatabase().query(
+                        chat.TABLE_NAME,null,
+                        chat.CONTACT + "=" + id,
+                        null,null,null,null);
     }
     public Cursor getAllChats() {
-        return getReadableDatabase()
-                .query(
+        return getReadableDatabase().query(
                         chat.TABLE_NAME,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null);
+                        null,null,null,null,null,null);
     }
     public Cursor getMen_Chat(String id) {
-        return getReadableDatabase()
-                .query(
-                        mens.TABLE_NAME,
-                        null,
+        return getReadableDatabase().query(
+                        mens.TABLE_NAME,null,
                         mens.ID_CHAT + "=" + id,
-                        null,
-                        null,
-                        null,
-                        null);
+                        null,null,null,null);
     }
 }
