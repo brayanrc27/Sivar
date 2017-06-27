@@ -60,7 +60,7 @@ public class adapterMen extends BaseAdapter {
         if (message.getWho()) {
             layout.setBackgroundResource(R.drawable.bubble2);
             parent_layout.setGravity(Gravity.END);
-        } else {
+        }else {
             layout.setBackgroundResource(R.drawable.bubble1);
             parent_layout.setGravity(Gravity.START);
         }
