@@ -4,15 +4,17 @@ import android.content.ContentValues;
 
 import com.lb.s.db.chatContract.*;
 
+import java.util.UUID;
+
 public class objMen {
     private String id;
     private String idChat;
     private Integer who;//1 yo 0 el
     private String message;
-    private Integer date;//unix format
+    private long date;//unix format
 
-    public objMen(String Id,String IdChat,Integer Who,String Message,Integer Date){
-        this.id=Id;
+    public objMen(String IdChat,Integer Who,String Message,long Date){
+        this.id="M-" + UUID.randomUUID().toString();
         this.idChat=IdChat;
         this.who=Who;
         this.message=Message;
@@ -30,7 +32,7 @@ public class objMen {
 
     public String getId(){ return this.id; }
     public String getIdChat(){ return this.idChat; }
-    public Integer getUse(){ return this.who; }
-    public String getMen(){ return this.message; }
-    public Integer getDat(){ return this.date; }
+    public Boolean getWho(){ if (this.who==1){ return true; }else{ return false; }}
+    public String getMessage(){ return this.message; }
+    public long getDate(){ return this.date; }
 }

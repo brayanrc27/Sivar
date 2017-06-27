@@ -49,14 +49,6 @@ public class dbHelper extends SQLiteOpenHelper {
         db.insert(chat.TABLE_NAME,null,o1.toContentValues());
         db.insert(chat.TABLE_NAME,null,o2.toContentValues());
         db.insert(chat.TABLE_NAME,null,o3.toContentValues());
-
-        objMen m1 = new objMen("M001","C001",0,"Hola prueba",1498376340);
-        objMen m2 = new objMen("M001","C001",1,"Hola respuesta",1498376341);
-        objMen m3 = new objMen("M001","C001",0,"Ni idea",1498377341);
-
-        db.insert(mens.TABLE_NAME,null,m1.toContentValues());
-        db.insert(mens.TABLE_NAME,null,m2.toContentValues());
-        db.insert(mens.TABLE_NAME,null,m3.toContentValues());
     }
 
     @Override
@@ -91,13 +83,34 @@ public class dbHelper extends SQLiteOpenHelper {
                 null,
                 o.toContentValues());
     }
-
+    public Cursor getChat(String id) {
+        return getReadableDatabase()
+                .query(
+                        chat.TABLE_NAME,
+                        null,
+                        chat.ID + "=" + id,
+                        null,
+                        null,
+                        null,
+                        null);
+    }
     public Cursor getAllChats() {
         return getReadableDatabase()
                 .query(
                         chat.TABLE_NAME,
                         null,
                         null,
+                        null,
+                        null,
+                        null,
+                        null);
+    }
+    public Cursor getMen_Chat(String id) {
+        return getReadableDatabase()
+                .query(
+                        mens.TABLE_NAME,
+                        null,
+                        mens.ID_CHAT + "=" + id,
                         null,
                         null,
                         null,

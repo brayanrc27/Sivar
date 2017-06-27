@@ -1,6 +1,7 @@
 package com.lb.s.obj;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import com.lb.s.db.chatContract.*;
 
@@ -24,6 +25,12 @@ public class objChat {
         values.put(chat.CONTACT, conact);
         values.put(chat.ANONYM, anonym);
         return values;
+    }
+    public objChat constructValues(Cursor c){
+        this.id=c.getString(0);
+        this.conact=c.getString(1);
+        this.anonym=c.getInt(2);
+        return this;
     }
 
     public String getId(){ return this.id; }
