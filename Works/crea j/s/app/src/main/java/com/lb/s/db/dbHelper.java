@@ -16,10 +16,6 @@ import com.lb.s.obj.objMen;
 
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by HP on 25/6/2017.
- */
-
 public class dbHelper extends SQLiteOpenHelper {
     public static String TAG = "------>DB";
     public static final int DATABASE_VERSION = 1;
