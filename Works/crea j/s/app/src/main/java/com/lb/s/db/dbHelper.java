@@ -3,13 +3,18 @@ package com.lb.s.db;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 
 import com.lb.s.db.chatContract.*;
 import com.lb.s.obj.objChat;
 import com.lb.s.obj.objMen;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by HP on 25/6/2017.
@@ -20,9 +25,7 @@ public class dbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Chat.db";
 
-    public dbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+    public dbHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION);}
 
     private String ID_CHAT = "REFERENCES " + chat.TABLE_NAME + "(" + chat.ID + ")";
 
@@ -77,6 +80,7 @@ public class dbHelper extends SQLiteOpenHelper {
                 o.toContentValues());
     }
     public long saveMen(objMen o) {
+        Log.d(TAG, "saveMen: --------" + o.getId());
         SQLiteDatabase s = getWritableDatabase();
         return s.insert(
                 mens.TABLE_NAME,
@@ -91,21 +95,27 @@ public class dbHelper extends SQLiteOpenHelper {
                         chat.ID + "=?",
                         var,null,null,null);
     }
-    public Cursor getChat_C(String id) {
-        return getReadableDatabase().query(
-                        chat.TABLE_NAME,null,
-                        chat.CONTACT + "=" + id,
-                        null,null,null,null);
-    }
     public Cursor getAllChats() {
-        return getReadableDatabase().query(
-                        chat.TABLE_NAME,
-                        null,null,null,null,null,null);
+        try {
+            return getReadableDatabase().query(
+                    chat.TABLE_NAME,
+                    null,null,null,null,null,null);
+        }catch (Exception e){ return null; }
     }
     public Cursor getMen_Chat(String id) {
-        return getReadableDatabase().query(
-                        mens.TABLE_NAME,null,
-                        mens.ID_CHAT + "=" + id,
-                        null,null,null,null);
+        String var[] = {id};
+        try {
+            return getReadableDatabase().query(
+                    mens.TABLE_NAME,null,
+                    mens.ID_CHAT + "=?",
+                    var,null,null,null);
+        }catch (Exception e){ return null; }
+    }
+    public Cursor getAllMens() {
+        try {
+            return getReadableDatabase().query(
+                    mens.TABLE_NAME,
+                    null,null,null,null,null,null);
+        }catch (Exception e){ return null; }
     }
 }

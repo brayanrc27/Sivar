@@ -17,17 +17,20 @@ import android.widget.TextView;
 import com.lb.s.R;
 import com.lb.s.commons;
 import com.lb.s.obj.objMen;
+import com.lb.s.db.dbHelper;
 
 import java.util.ArrayList;
 
 public class adapterMen extends BaseAdapter {
 
     private static commons commons;
+    private static dbHelper db;
 
     private static LayoutInflater inflater = null;
     ArrayList<objMen> chatMessageList;
 
     public adapterMen(Activity activity, ArrayList<objMen> list) {
+        db = new dbHelper(activity);
         chatMessageList = list;
         inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,5 +70,12 @@ public class adapterMen extends BaseAdapter {
         msg.setTextColor(Color.BLACK);
         return vi;
     }
-    public void add(objMen object) { chatMessageList.add(object); }
+    public void init(Cursor c){
+        for (int i=0;c.moveToPosition(i);i++){
+            c.moveToPosition(i);
+            objMen men = new objMen(c.getString(0),c.getString(1),c.getInt(2),c.getString(3),c.getLong(4));
+            chatMessageList.add(men);
+        }
+    }
+    public void add(objMen object) { chatMessageList.add(object); db.saveMen(object); }
 }

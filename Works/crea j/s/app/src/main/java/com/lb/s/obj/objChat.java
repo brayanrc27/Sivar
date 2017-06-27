@@ -28,7 +28,7 @@ public class objChat {
         return values;
     }
     public objChat constructValues(Cursor c){
-        DatabaseUtils.dumpCursor(c);
+        //DatabaseUtils.dumpCursor(c);
         c.moveToPosition(0);
         this.id=c.getString(0);
         this.conact=c.getString(1);

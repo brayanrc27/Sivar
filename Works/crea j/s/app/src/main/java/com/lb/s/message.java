@@ -1,5 +1,8 @@
 package com.lb.s;
 
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.lb.s.adap.adapterMen;
 import com.lb.s.db.dbHelper;
@@ -56,6 +60,11 @@ public class message extends AppCompatActivity implements View.OnClickListener {
         message = new ArrayList<objMen>();
         adapM = new adapterMen(this, message);
         msgList.setAdapter(adapM);
+        DatabaseUtils.dumpCursor(db.getAllMens());
+        if(db.getMen_Chat(chatId)!=null){
+            adapM.init(db.getMen_Chat(chatId));
+            adapM.notifyDataSetChanged();
+        } else Toast.makeText(this,"Aún no tienes mensajes inicia hoy!!",Toast.LENGTH_LONG).show();
     }
 
     public void sendTextMessage(View v) {
